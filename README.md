@@ -1,4 +1,4 @@
-# GMail Excel Attachment Processor
+# Python GMail Excel Attachment Processor
 
 Download and send email attachments using gmail API.
 
@@ -12,13 +12,14 @@ Download and send email attachments using gmail API.
     
 
 # Initial run
-    On the first run of send of load you'll be directed in browser to allow access for you gmail account. This creates a token in **token.pickle** file which is used to all sub-sequent calls.
+    On the first run of send of load you'll be directed in browser to allow access for you gmail account. 
+    This creates a token in **token.pickle** file which is used to all sub-sequent calls.
     
     Refresh token have to be re-created on password change.
     
 # Send example
     
-    python send.# GMail Excel Attachment Processor
+    python send.
 
 Download and send email attachments using gmail API.
 
