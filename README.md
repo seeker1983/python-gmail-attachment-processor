@@ -4,18 +4,18 @@ Download and send email attachments using gmail API.
 
 # Installation
 
-    pip3 install -r requirements.txt
+	pip3 install -r requirements.txt
 
 # Generating Google App Certificate
-    Scripts use **credentials.json** file to authorizing google project.
-    Follow this instruction on how to create one.
+Scripts use **credentials.json** file to authorizing google project.
+Follow this instruction on how to create one.
     
 
 # Initial run
-    On the first run of send of load you'll be directed in browser to allow access for you gmail account. 
-    This creates a token in **token.pickle** file which is used to all sub-sequent calls.
+On the first run of send of load you'll be directed in browser to allow access for you gmail account. 
+This creates a token in **token.pickle** file which is used to all sub-sequent calls.
     
-    Refresh token have to be re-created on password change.
+Refresh token have to be re-created on password change.
     
 # Send example
     
