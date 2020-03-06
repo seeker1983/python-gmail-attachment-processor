@@ -12,7 +12,7 @@ def main():
 
 	"""
 
-	create_message_with_attachment('me', 'krupod@gmail.com', 'Test email with attachment', "Contents of the body", 'test-attachment.xls')
+	gmail.create_message_with_attachment('me', 'krupod@gmail.com', 'Test email with attachment', "Contents of the body", 'test-attachment.xls')
 
 
 main()

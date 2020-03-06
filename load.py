@@ -7,7 +7,7 @@ def main():
 	folder: Location to store files.
   """	
   
-  gmail.load_unread('files')
+  gmail.load_unread('files', ['krupod@gmail.com'], "label_excel_loaded_2")
 
 
 

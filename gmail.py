@@ -57,23 +57,40 @@ def create_message_with_attachment(sender, to, subject, message_text, file):
 
   build_service().users().messages().send(userId='me', body=body).execute()
 
-def load_unread(folder):
+def load_unread(folder, whitelist, label_name, markasread = False):
     """ Loads excel attachments from unread messages in associated gmail account.
 
     Args:
       folder: Location to store files.
+      whitelist: Array of emails of interest.
     """
     service = build_service()
 
-    os.makedirs(folder, exist_ok = True)
+    labels = [ label for label in service.users().labels().list(userId = 'me').execute()['labels'] if label['name'] == label_name]
 
-    messages = list_query_messages(service, 'me', query='is:unread label:inbox has:attachment')
+    if len(labels) == 0:
+      print('Creating label %s' % label_name)
+      label = service.users().labels().create(userId='me', body={'name' : label_name}).execute()
+    else:
+      label = labels[0]
+  
+    print('Processing for label %s, id %s' % (label_name, label['id']))
+
+    os.makedirs(folder, exist_ok = True)
+    messages = list_query_messages(service, 'me', query='label:unread label:inbox has:attachment NOT label:' + label_name)
 
     for m in messages:
         message = service.users().messages().get(userId='me', id=m.get('id')).execute()
-        pprint(message)
-        save_message_attachments(service, message, folder)
-        service.users().messages().modify(userId='me', id=m.get('id'), body={'removeLabelIds': ['UNREAD']}).execute()
+        headers = message['payload']['headers']
+        sender = [i['value'] for i in headers if i['name'].lower() == 'from'][0]
+        if sender in whitelist:
+          print('Saving attachment from %s: [%s]' % (sender, message['snippet']))
+          save_message_attachments(service, message, folder)
+          print('Applying label %s' % label_name)
+          service.users().messages().modify(userId='me', id=m.get('id'), body={'addLabelIds': [label['id']]}).execute()
+          if markasread:
+            print('Marking as read')
+            service.users().messages().modify(userId='me', id=m.get('id'), body={'removeLabelIds': ['UNREAD']}).execute()
 
 
 def list_labels():
