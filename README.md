@@ -24,6 +24,7 @@ Refresh token have to be re-created on password change.
 
 or 
 
+    import gmail
     gmail.create_message_with_attachment('me', 'krupod@gmail.com', 'Test email', "Contents of the body", 'test-attachment.xls')
 
 Will send message from your account to **krupod@gmail.com** with subject **"Test email"**, body **"Contents of the body"**, and will attach local file **"test-attachment.xls"**
