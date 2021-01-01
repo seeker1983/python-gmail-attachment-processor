@@ -20,24 +20,29 @@ Refresh token have to be re-created on password change.
     
 # Send example
     
-    python send.py
+    # python send.py
 
 or 
-
+    
     import gmail
+    
     gmail.create_message_with_attachment('me', 'krupod@gmail.com', 'Test email', "Contents of the body", 'test-attachment.xls')
 
 Will send message from your account to **krupod@gmail.com** with subject **"Test email"**, body **"Contents of the body"**, and will attach local file **"test-attachment.xls"**
 
 # Load example
     
-    python load.py
+    # python load.py
 
 or 
-
+    
+    import gmail
+    
     gmail.load_unread('files', ['krupod@gmail.com'], "attachments_loaded")
 
 Will download attachments from unread emails with "krupod@gmail.com" sender, save them in **"files"** folder and apply label **"attachments_loaded"** to them.
+
+Will also mark processed messages as **read**, if **True** is passed as extra **4th parameter**.
 
 #### File list
 
